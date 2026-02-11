@@ -290,7 +290,7 @@ export function Projects() {
           >
             And 20+ more projects on{" "}
             <a
-              href="https://github.com"
+              href="https://github.com/Najahi-Dev?tab=repositories"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary-400 hover:text-primary-300 transition-colors"
