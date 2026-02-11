@@ -151,12 +151,12 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                   {project.techStack.map((t) => (
                     <div
                       key={t.name}
-                      className="flex items-start gap-2 text-sm bg-white/[0.02] rounded-lg p-3"
+                      className="flex flex-col sm:flex-row items-start gap-1 sm:gap-2 text-sm bg-white/[0.02] rounded-lg p-3"
                     >
                       <span className="text-primary-300 font-mono font-medium whitespace-nowrap">
                         {t.name}
                       </span>
-                      <span className="text-dark-600">— {t.reason}</span>
+                      <span className="text-dark-600 break-words">— {t.reason}</span>
                     </div>
                   ))}
                 </div>

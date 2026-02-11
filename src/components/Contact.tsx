@@ -67,7 +67,7 @@ export function Contact() {
             </div>
 
             {/* Social links */}
-            <div className="flex items-center gap-3 pt-4">
+            <div className="flex flex-wrap items-center gap-3 pt-4">
               <a
                 href={personalInfo.github}
                 target="_blank"
@@ -114,7 +114,7 @@ export function Contact() {
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             {/* Quick message CTA */}
-            <div className="glass rounded-2xl p-6 mb-6">
+            <div className="glass rounded-2xl p-5 sm:p-6">
               <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
                 <Send size={16} className="text-primary-400" />
                 Quick Message

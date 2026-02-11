@@ -58,10 +58,10 @@ export function PageLoader({ onLoadingComplete }: PageLoaderProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="relative mb-12 text-center"
+            className="relative mb-8 sm:mb-12 text-center"
           >
             <motion.div
-              className="text-5xl sm:text-6xl font-bold tracking-tight"
+              className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight"
               style={{
                 background:
                   "linear-gradient(135deg, #748ffc, #5c7cfa, #f59f00)",
@@ -87,7 +87,7 @@ export function PageLoader({ onLoadingComplete }: PageLoaderProps) {
             initial={{ opacity: 0, scaleX: 0.8 }}
             animate={{ opacity: 1, scaleX: 1 }}
             transition={{ duration: 0.4, delay: 0.2 }}
-            className="relative w-64 sm:w-80"
+            className="relative w-48 sm:w-64 md:w-80"
           >
             {/* Track */}
             <div className="h-[2px] w-full bg-white/[0.06] rounded-full overflow-hidden">
@@ -135,7 +135,7 @@ export function PageLoader({ onLoadingComplete }: PageLoaderProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
-            className="absolute bottom-12 flex items-center gap-1.5"
+            className="absolute bottom-6 sm:bottom-12 flex items-center gap-1.5"
           >
             {[0, 1, 2].map((i) => (
               <motion.div

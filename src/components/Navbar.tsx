@@ -35,7 +35,7 @@ export function Navbar() {
           <div className="flex h-16 items-center justify-between">
             <motion.a
               href="#hero"
-              className="text-lg font-bold tracking-tight"
+              className="text-base sm:text-lg font-bold tracking-tight truncate max-w-[180px] sm:max-w-none"
               whileHover={{ scale: 1.05 }}
             >
               <span className="text-primary-400">&lt;</span>
