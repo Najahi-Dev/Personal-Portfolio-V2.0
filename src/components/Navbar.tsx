@@ -39,7 +39,7 @@ export function Navbar() {
               whileHover={{ scale: 1.05 }}
             >
               <span className="text-primary-400">&lt;</span>
-              <span className="text-white">AN</span>
+              <span className="text-white uppercase">Ahmadh Najahi</span>
               <span className="text-primary-400">/&gt;</span>
             </motion.a>
 
