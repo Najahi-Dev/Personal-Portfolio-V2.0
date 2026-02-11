@@ -306,25 +306,6 @@ This generates an optimized single-file build in the `dist/` directory using `vi
 
 ---
 
-## 📸 Screenshots
-
-> _Add screenshots of your portfolio here_
-
-### Hero Section
-![<img width="1856" height="933" alt="image" src="https://github.com/user-attachments/assets/47b6a2b3-9ce6-4c09-8199-34208010a797" />
-](#)
-
-### Projects Section
-![Projects](#)
-
-### Skills Section
-![Skills](#)
-
-### Mobile View
-![Mobile](#)
-
----
-
 ## 📝 License
 
 This project is open source and available under the [MIT License](LICENSE).
