@@ -1,3 +1,4 @@
+import { useState, useCallback } from "react";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { About } from "./components/About";
@@ -8,10 +9,15 @@ import { Education } from "./components/Education";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import { ParticleBackground } from "./components/ParticleBackground";
+import { PageLoader } from "./components/PageLoader";
 
 export function App() {
+  const [loading, setLoading] = useState(true);
+  const handleLoadingComplete = useCallback(() => setLoading(false), []);
   return (
-    <div className="relative min-h-screen bg-dark-950 text-dark-100">
+    <>
+      {loading && <PageLoader onLoadingComplete={handleLoadingComplete} />}
+      <div className="relative min-h-screen bg-dark-950 text-dark-100">
       {/* Multi-layer animated background */}
       <ParticleBackground />
 
@@ -72,5 +78,6 @@ export function App() {
         <Footer />
       </div>
     </div>
+    </>
   );
 }

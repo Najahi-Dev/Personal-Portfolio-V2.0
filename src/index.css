@@ -156,3 +156,8 @@ body {
 .line-decoration:hover::after {
   width: 100%;
 }
+
+@keyframes loader-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}

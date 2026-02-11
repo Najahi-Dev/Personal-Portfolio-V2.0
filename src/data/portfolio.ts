@@ -213,13 +213,3 @@ export const education = [
     details: []
   }
 ];
-
-export const reference = {
-  name: "NMM. Nuhman",
-  qualifications: "MBA, BEng(Hons) in Software Engineering",
-  title: "Programme Manager / Assistant Lecturer – IT",
-  institution: "ESOFT Metro Campus Batticaloa",
-  address: "43, Baily Road, Batticaloa, Sri Lanka",
-  mobile: "0707157160 / 0760730103",
-  email: "mohamed.nuhman@esoft.lk"
-};

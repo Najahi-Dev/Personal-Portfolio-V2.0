@@ -10,7 +10,7 @@ import {
   ArrowUpRight,
   FileDown,
 } from "lucide-react";
-import { personalInfo, reference } from "../data/portfolio";
+import { personalInfo } from "../data/portfolio";
 import { downloadCV } from "../utils/generateCV";
 
 export function Contact() {
@@ -124,7 +124,9 @@ export function Contact() {
                 conversation.
               </p>
               <a
-                href={`mailto:${personalInfo.email}?subject=Portfolio Inquiry&body=Hi Ahmadh, I saw your portfolio and would like to discuss...`}
+                href={`mailto:${personalInfo.email}?subject=${encodeURIComponent("Portfolio Inquiry")}&body=${encodeURIComponent("Hi Ahmadh, I saw your portfolio and would like to discuss...")}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-sm text-dark-300 hover:text-white hover:border-primary-500/30 hover:bg-primary-500/5 transition-all"
               >
                 <Mail size={14} />
@@ -133,27 +135,7 @@ export function Contact() {
               </a>
             </div>
 
-            {/* Reference */}
-            <div className="glass rounded-2xl p-6">
-              <h3 className="text-white font-semibold mb-4">Reference</h3>
-              <div className="space-y-2 text-sm">
-                <p className="text-white font-medium">{reference.name}</p>
-                <p className="text-dark-500 text-xs">{reference.qualifications}</p>
-                <p className="text-dark-400">{reference.title}</p>
-                <p className="text-dark-500">{reference.institution}</p>
-                <p className="text-dark-600 text-xs">{reference.address}</p>
-                <div className="pt-2 space-y-1">
-                  <p className="text-dark-500 flex items-center gap-2">
-                    <Phone size={12} className="text-dark-600" />
-                    {reference.mobile}
-                  </p>
-                  <p className="text-dark-500 flex items-center gap-2">
-                    <Mail size={12} className="text-dark-600" />
-                    {reference.email}
-                  </p>
-                </div>
-              </div>
-            </div>
+
           </motion.div>
         </div>
       </div>
