@@ -1,4 +1,6 @@
-<img width="1856" height="933" alt="image" src="https://github.com/user-attachments/assets/68e97bc3-5e53-4ae2-b83e-563e1bc10de6" /># 🚀 Ahmadh Najahi — Portfolio
+<img width="1856" height="933" alt="image" src="https://github.com/user-attachments/assets/68e97bc3-5e53-4ae2-b83e-563e1bc10de6" />
+
+# 🚀 Ahmadh Najahi - Portfolio
 
 A modern, animated, and responsive personal portfolio website built with **React**, **TypeScript**, **Vite**, and **Tailwind CSS**. Designed with a clean, recruiter-friendly layout and immersive visual effects.
 
