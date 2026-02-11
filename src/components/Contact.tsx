@@ -124,7 +124,7 @@ export function Contact() {
                 conversation.
               </p>
               <a
-                href={`mailto:${personalInfo.email}?subject=${encodeURIComponent("Portfolio Inquiry")}&body=${encodeURIComponent("Hi Ahmadh, I saw your portfolio and would like to discuss...")}`}
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${personalInfo.email}&su=${encodeURIComponent("Portfolio Inquiry")}&body=${encodeURIComponent("Hi Ahmadh, I saw your portfolio and would like to discuss...")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-sm text-dark-300 hover:text-white hover:border-primary-500/30 hover:bg-primary-500/5 transition-all"
