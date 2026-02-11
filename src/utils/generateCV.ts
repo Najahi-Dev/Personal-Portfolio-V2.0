@@ -116,7 +116,7 @@ export function downloadCV() {
     doc.text(edu.period, pageWidth - margin, y, { align: "right" });
     y += 4.5;
     setFont(9, "normal", colors.gray);
-    doc.text(`${edu.school} — ${edu.location}`, margin, y);
+    doc.text(`${edu.school} - ${edu.location}`, margin, y);
     y += 4;
     if (edu.details) {
       setFont(8.5, "normal", colors.gray);
