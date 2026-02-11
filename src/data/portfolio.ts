@@ -6,8 +6,8 @@ export const personalInfo = {
   email: "ahmednajahi2003@gmail.com",
   phone: "+94750538620",
   address: "60/B Al-Manar Road, Maruthamunai-02, Kalmunai, Ampara, Sri Lanka",
-  linkedin: "https://linkedin.com/in/profile",
-  github: "https://github.com",
+  linkedin: "https://www.linkedin.com/in/ahmadh-najahi-61452931b/",
+  github: "https://github.com/Najahi-Dev",
   cvLink: "#",
 };
 
