@@ -14,11 +14,18 @@ import {
   Trophy,
   ArrowRight,
 } from "lucide-react";
-import { featuredProjects, otherProjects, type Project } from "../data/portfolio";
+import {
+  featuredProjects,
+  otherProjects,
+  type Project,
+} from "../data/portfolio";
+import { useTheme } from "../context/ThemeContext";
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const [expanded, setExpanded] = useState(false);
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const { theme } = useTheme();
+  const isLight = theme === "light";
 
   return (
     <motion.div
@@ -36,12 +43,20 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               <span className="text-xs font-mono text-primary-400/60">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <span className="text-xs text-dark-600 font-mono">{project.date}</span>
+              <span className="text-xs text-dark-600 font-mono">
+                {project.date}
+              </span>
             </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
+            <h3
+              className={`text-xl sm:text-2xl font-bold mb-2 ${isLight ? "text-dark-900" : "text-white"}`}
+            >
               {project.title}
             </h3>
-            <p className="text-dark-400 text-sm sm:text-base">{project.tagline}</p>
+            <p
+              className={`text-sm sm:text-base ${isLight ? "text-dark-600" : "text-dark-400"}`}
+            >
+              {project.tagline}
+            </p>
           </div>
           <div className="flex items-center gap-2">
             {project.githubLink && (
@@ -49,7 +64,11 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 href={project.githubLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg border border-white/10 text-dark-500 hover:text-white hover:border-white/20 transition-all"
+                className={`p-2 rounded-lg border transition-all ${
+                  isLight
+                    ? "border-black/10 text-dark-500 hover:text-dark-900 hover:border-black/20"
+                    : "border-white/10 text-dark-500 hover:text-white hover:border-white/20"
+                }`}
               >
                 <Github size={16} />
               </a>
@@ -59,7 +78,11 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 href={project.liveLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg border border-white/10 text-dark-500 hover:text-primary-400 hover:border-primary-400/30 transition-all"
+                className={`p-2 rounded-lg border transition-all ${
+                  isLight
+                    ? "border-black/10 text-dark-500 hover:text-primary-500 hover:border-primary-400/30"
+                    : "border-white/10 text-dark-500 hover:text-primary-400 hover:border-primary-400/30"
+                }`}
               >
                 <ExternalLink size={16} />
               </a>
@@ -88,7 +111,10 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           {expanded ? (
             <ChevronUp size={14} />
           ) : (
-            <ChevronDown size={14} className="group-hover:translate-y-0.5 transition-transform" />
+            <ChevronDown
+              size={14}
+              className="group-hover:translate-y-0.5 transition-transform"
+            />
           )}
         </button>
       </div>
@@ -103,7 +129,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <div className="px-6 sm:px-8 pb-8 border-t border-white/5 pt-6 space-y-6">
+            <div
+              className={`px-6 sm:px-8 pb-8 border-t pt-6 space-y-6 ${isLight ? "border-black/5" : "border-white/5"}`}
+            >
               {/* Problem */}
               <DetailBlock
                 icon={Target}
@@ -122,7 +150,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               <div>
                 <div className="flex items-center gap-2 mb-3">
                   <User size={14} className="text-primary-400" />
-                  <h4 className="text-sm font-semibold text-white uppercase tracking-wider">
+                  <h4
+                    className={`text-sm font-semibold uppercase tracking-wider ${isLight ? "text-dark-800" : "text-white"}`}
+                  >
                     My Role
                   </h4>
                 </div>
@@ -132,7 +162,10 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                       key={r}
                       className="flex items-center gap-2 text-sm text-dark-400"
                     >
-                      <ArrowRight size={12} className="text-primary-500/50 flex-shrink-0" />
+                      <ArrowRight
+                        size={12}
+                        className="text-primary-500/50 flex-shrink-0"
+                      />
                       {r}
                     </li>
                   ))}
@@ -143,7 +176,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               <div>
                 <div className="flex items-center gap-2 mb-3">
                   <Cpu size={14} className="text-primary-400" />
-                  <h4 className="text-sm font-semibold text-white uppercase tracking-wider">
+                  <h4
+                    className={`text-sm font-semibold uppercase tracking-wider ${isLight ? "text-dark-800" : "text-white"}`}
+                  >
                     Tech Stack & Why
                   </h4>
                 </div>
@@ -156,7 +191,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                       <span className="text-primary-300 font-mono font-medium whitespace-nowrap">
                         {t.name}
                       </span>
-                      <span className="text-dark-600 break-words">— {t.reason}</span>
+                      <span className="text-dark-600 break-words">
+                        — {t.reason}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -166,7 +203,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               <div>
                 <div className="flex items-center gap-2 mb-3">
                   <AlertTriangle size={14} className="text-accent" />
-                  <h4 className="text-sm font-semibold text-white uppercase tracking-wider">
+                  <h4
+                    className={`text-sm font-semibold uppercase tracking-wider ${isLight ? "text-dark-800" : "text-white"}`}
+                  >
                     Challenges & Learnings
                   </h4>
                 </div>
@@ -206,22 +245,38 @@ function DetailBlock({
   title: string;
   content: string;
 }) {
+  const { theme } = useTheme();
+  const isLight = theme === "light";
   return (
     <div>
       <div className="flex items-center gap-2 mb-2">
         <Icon size={14} className="text-primary-400" />
-        <h4 className="text-sm font-semibold text-white uppercase tracking-wider">
+        <h4
+          className={`text-sm font-semibold uppercase tracking-wider ${isLight ? "text-dark-800" : "text-white"}`}
+        >
           {title}
         </h4>
       </div>
-      <p className="text-sm text-dark-400 leading-relaxed">{content}</p>
+      <p
+        className={`text-sm leading-relaxed ${isLight ? "text-dark-600" : "text-dark-400"}`}
+      >
+        {content}
+      </p>
     </div>
   );
 }
 
 export function Projects() {
-  const [sectionRef, sectionInView] = useInView({ triggerOnce: true, threshold: 0.05 });
-  const [otherRef, otherInView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const [sectionRef, sectionInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.05,
+  });
+  const [otherRef, otherInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+  const { theme } = useTheme();
+  const isLight = theme === "light";
 
   return (
     <section id="projects" className="relative py-24 sm:py-32">
@@ -236,7 +291,9 @@ export function Projects() {
           className="mb-16"
         >
           <p className="text-primary-400 font-mono text-sm mb-2">02 — Work</p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          <h2
+            className={`text-3xl sm:text-4xl font-bold mb-4 ${isLight ? "text-dark-900" : "text-white"}`}
+          >
             Featured Projects
           </h2>
           <p className="text-dark-500 max-w-xl">
@@ -258,7 +315,7 @@ export function Projects() {
             initial={{ opacity: 0, y: 20 }}
             animate={otherInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="text-xl font-semibold text-white mb-6"
+            className={`text-xl font-semibold mb-6 ${isLight ? "text-dark-900" : "text-white"}`}
           >
             Other Notable Projects
           </motion.h3>
@@ -271,12 +328,12 @@ export function Projects() {
                 transition={{ duration: 0.4, delay: i * 0.1 }}
                 className="glass rounded-xl p-5 glass-hover transition-all group cursor-default"
               >
-                <h4 className="text-white font-medium mb-1 group-hover:text-primary-300 transition-colors">
+                <h4
+                  className={`font-medium mb-1 group-hover:text-primary-300 transition-colors ${isLight ? "text-dark-800" : "text-white"}`}
+                >
                   {p.title}
                 </h4>
-                <p className="text-xs font-mono text-dark-600 mb-2">
-                  {p.date}
-                </p>
+                <p className="text-xs font-mono text-dark-600 mb-2">{p.date}</p>
                 <p className="text-xs text-dark-500">{p.tech}</p>
               </motion.div>
             ))}

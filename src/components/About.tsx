@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Code2, Database, Lightbulb, Zap } from "lucide-react";
 import { aboutMe } from "../data/portfolio";
+import { useTheme } from "../context/ThemeContext";
 
 const highlights = [
   { icon: Code2, label: "Frontend Systems", desc: "React & TypeScript" },
@@ -12,6 +13,8 @@ const highlights = [
 
 export function About() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
+  const { theme } = useTheme();
+  const isLight = theme === "light";
 
   return (
     <section id="about" className="relative py-24 sm:py-32 overflow-hidden">
@@ -27,7 +30,11 @@ export function About() {
           className="mb-16"
         >
           <p className="text-primary-400 font-mono text-sm mb-2">01 — About</p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white">
+          <h2
+            className={`text-3xl sm:text-4xl font-bold ${
+              isLight ? "text-dark-900" : "text-white"
+            }`}
+          >
             About Me
           </h2>
         </motion.div>
@@ -40,7 +47,11 @@ export function About() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="md:col-span-3"
           >
-            <p className="text-dark-400 leading-relaxed text-base sm:text-lg">
+            <p
+              className={`leading-relaxed text-base sm:text-lg ${
+                isLight ? "text-dark-600" : "text-dark-400"
+              }`}
+            >
               {aboutMe}
             </p>
           </motion.div>
@@ -61,8 +72,16 @@ export function About() {
                 className="glass rounded-xl p-4 text-center glass-hover transition-all cursor-default"
               >
                 <item.icon className="w-5 h-5 text-primary-400 mx-auto mb-2" />
-                <p className="text-white text-sm font-medium">{item.label}</p>
-                <p className="text-dark-600 text-xs mt-1">{item.desc}</p>
+                <p
+                  className={`text-sm font-medium ${isLight ? "text-dark-800" : "text-white"}`}
+                >
+                  {item.label}
+                </p>
+                <p
+                  className={`text-xs mt-1 ${isLight ? "text-dark-500" : "text-dark-600"}`}
+                >
+                  {item.desc}
+                </p>
               </motion.div>
             ))}
           </motion.div>

@@ -2,8 +2,11 @@ import { motion } from "framer-motion";
 import { ArrowDown, Github, Linkedin, FileDown } from "lucide-react";
 import { personalInfo } from "../data/portfolio";
 import { downloadCV } from "../utils/generateCV";
+import { useTheme } from "../context/ThemeContext";
 
 export function Hero() {
+  const { theme } = useTheme();
+  const isLight = theme === "light";
   return (
     <section
       id="hero"
@@ -74,7 +77,9 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-4"
         >
-          <span className="text-white">Hi, I'm </span>
+          <span className={isLight ? "text-dark-900" : "text-white"}>
+            Hi, I'm{" "}
+          </span>
           <span className="gradient-text">{personalInfo.name}</span>
         </motion.h1>
 
@@ -83,7 +88,9 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-lg sm:text-xl md:text-2xl text-dark-400 font-medium mb-6 font-mono"
+          className={`text-lg sm:text-xl md:text-2xl font-medium mb-6 font-mono ${
+            isLight ? "text-dark-600" : "text-dark-400"
+          }`}
         >
           {personalInfo.role}
         </motion.p>
@@ -93,7 +100,9 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-base sm:text-lg text-dark-500 max-w-2xl mx-auto mb-10 leading-relaxed"
+          className={`text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed ${
+            isLight ? "text-dark-500" : "text-dark-500"
+          }`}
         >
           {personalInfo.tagline}
         </motion.p>
@@ -110,13 +119,20 @@ export function Hero() {
             className="group relative inline-flex items-center gap-2 rounded-xl bg-primary-600 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-primary-500 hover:shadow-lg hover:shadow-primary-500/25"
           >
             View Projects
-            <ArrowDown size={16} className="group-hover:translate-y-0.5 transition-transform" />
+            <ArrowDown
+              size={16}
+              className="group-hover:translate-y-0.5 transition-transform"
+            />
           </a>
           <a
             href={personalInfo.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-6 py-3 text-sm font-medium text-dark-300 transition-all hover:border-white/20 hover:text-white hover:bg-white/10"
+            className={`inline-flex items-center gap-2 rounded-xl border px-6 py-3 text-sm font-medium transition-all ${
+              isLight
+                ? "border-black/10 bg-black/5 text-dark-700 hover:border-black/20 hover:text-dark-900 hover:bg-black/10"
+                : "border-white/10 bg-white/5 text-dark-300 hover:border-white/20 hover:text-white hover:bg-white/10"
+            }`}
           >
             <Github size={16} />
             GitHub
@@ -125,7 +141,11 @@ export function Hero() {
             href={personalInfo.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-6 py-3 text-sm font-medium text-dark-300 transition-all hover:border-blue-400/30 hover:text-blue-400 hover:bg-blue-400/5"
+            className={`inline-flex items-center gap-2 rounded-xl border px-6 py-3 text-sm font-medium transition-all ${
+              isLight
+                ? "border-black/10 bg-black/5 text-dark-700 hover:border-blue-500/30 hover:text-blue-600 hover:bg-blue-500/5"
+                : "border-white/10 bg-white/5 text-dark-300 hover:border-blue-400/30 hover:text-blue-400 hover:bg-blue-400/5"
+            }`}
           >
             <Linkedin size={16} />
             LinkedIn
@@ -142,7 +162,10 @@ export function Hero() {
             onClick={downloadCV}
             className="inline-flex items-center gap-2 text-sm text-dark-600 hover:text-primary-400 transition-colors group cursor-pointer"
           >
-            <FileDown size={14} className="group-hover:-translate-y-0.5 transition-transform" />
+            <FileDown
+              size={14}
+              className="group-hover:-translate-y-0.5 transition-transform"
+            />
             Download CV (PDF)
           </button>
         </motion.div>
@@ -158,10 +181,16 @@ export function Hero() {
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
-          className="flex flex-col items-center gap-2 text-dark-600"
+          className={`flex flex-col items-center gap-2 ${
+            isLight ? "text-dark-500" : "text-dark-600"
+          }`}
         >
           <span className="text-xs tracking-widest uppercase">Scroll</span>
-          <div className="w-5 h-8 rounded-full border border-dark-700 flex items-start justify-center p-1">
+          <div
+            className={`w-5 h-8 rounded-full border flex items-start justify-center p-1 ${
+              isLight ? "border-dark-300" : "border-dark-700"
+            }`}
+          >
             <motion.div
               animate={{ y: [0, 12, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}

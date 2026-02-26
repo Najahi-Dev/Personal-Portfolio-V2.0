@@ -2,9 +2,12 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { GraduationCap, Award, MapPin, Calendar } from "lucide-react";
 import { education, certificates } from "../data/portfolio";
+import { useTheme } from "../context/ThemeContext";
 
 export function Education() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const { theme } = useTheme();
+  const isLight = theme === "light";
 
   return (
     <section className="relative py-24 sm:py-32">
@@ -17,8 +20,12 @@ export function Education() {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <p className="text-primary-400 font-mono text-sm mb-2">05 — Background</p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white">
+          <p className="text-primary-400 font-mono text-sm mb-2">
+            05 — Background
+          </p>
+          <h2
+            className={`text-3xl sm:text-4xl font-bold ${isLight ? "text-dark-900" : "text-white"}`}
+          >
             Education & Certifications
           </h2>
         </motion.div>
@@ -44,13 +51,17 @@ export function Education() {
                     className="relative pl-8"
                   >
                     {/* Timeline dot */}
-                    <div className="absolute left-0 top-1.5 w-[15px] h-[15px] rounded-full border-2 border-primary-500/40 bg-dark-950 flex items-center justify-center">
+                    <div
+                      className={`absolute left-0 top-1.5 w-[15px] h-[15px] rounded-full border-2 border-primary-500/40 flex items-center justify-center ${isLight ? "bg-[#f5f6fa]" : "bg-dark-950"}`}
+                    >
                       <div className="w-1.5 h-1.5 rounded-full bg-primary-400" />
                     </div>
 
                     <div className="glass rounded-xl p-5 glass-hover transition-all">
                       <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
-                        <h4 className="text-white font-medium text-sm sm:text-base">
+                        <h4
+                          className={`font-medium text-sm sm:text-base ${isLight ? "text-dark-800" : "text-white"}`}
+                        >
                           {edu.degree}
                         </h4>
                         <span className="flex items-center gap-1 text-xs text-primary-400 font-mono whitespace-nowrap">
@@ -58,7 +69,9 @@ export function Education() {
                           {edu.period}
                         </span>
                       </div>
-                      <p className="text-dark-500 text-sm mb-1">{edu.institution}</p>
+                      <p className="text-dark-500 text-sm mb-1">
+                        {edu.institution}
+                      </p>
                       <p className="flex items-center gap-1 text-xs text-dark-600">
                         <MapPin size={10} />
                         {edu.location}
@@ -68,7 +81,11 @@ export function Education() {
                           {edu.details.map((d) => (
                             <span
                               key={d}
-                              className="text-xs px-2 py-0.5 rounded bg-white/[0.03] text-dark-500 border border-white/5"
+                              className={`text-xs px-2 py-0.5 rounded border ${
+                                isLight
+                                  ? "bg-black/[0.03] text-dark-600 border-black/5"
+                                  : "bg-white/[0.03] text-dark-500 border-white/5"
+                              }`}
                             >
                               {d}
                             </span>
@@ -84,7 +101,9 @@ export function Education() {
 
           {/* Certificates */}
           <div className="lg:col-span-2">
-            <h3 className="text-lg font-semibold text-white mb-8 flex items-center gap-2">
+            <h3
+              className={`text-lg font-semibold mb-8 flex items-center gap-2 ${isLight ? "text-dark-900" : "text-white"}`}
+            >
               <Award size={20} className="text-accent" />
               Certifications
             </h3>
@@ -99,7 +118,9 @@ export function Education() {
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <h4 className="text-white text-sm font-medium group-hover:text-primary-300 transition-colors">
+                      <h4
+                        className={`text-sm font-medium group-hover:text-primary-300 transition-colors ${isLight ? "text-dark-800" : "text-white"}`}
+                      >
                         {cert.title}
                       </h4>
                       <p className="text-dark-600 text-xs mt-1">

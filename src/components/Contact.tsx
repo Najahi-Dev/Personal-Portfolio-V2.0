@@ -12,9 +12,12 @@ import {
 } from "lucide-react";
 import { personalInfo } from "../data/portfolio";
 import { downloadCV } from "../utils/generateCV";
+import { useTheme } from "../context/ThemeContext";
 
 export function Contact() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const { theme } = useTheme();
+  const isLight = theme === "light";
 
   return (
     <section id="contact" className="relative py-24 sm:py-32">
@@ -27,8 +30,12 @@ export function Contact() {
           transition={{ duration: 0.6 }}
           className="mb-16 text-center"
         >
-          <p className="text-primary-400 font-mono text-sm mb-2">06 — Contact</p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          <p className="text-primary-400 font-mono text-sm mb-2">
+            06 — Contact
+          </p>
+          <h2
+            className={`text-3xl sm:text-4xl font-bold mb-4 ${isLight ? "text-dark-900" : "text-white"}`}
+          >
             Let's Work Together
           </h2>
           <p className="text-dark-500 max-w-md mx-auto">
@@ -72,7 +79,11 @@ export function Contact() {
                 href={personalInfo.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-white/10 bg-white/5 text-sm text-dark-300 hover:text-white hover:border-white/20 transition-all"
+                className={`flex items-center gap-2 px-5 py-2.5 rounded-xl border text-sm transition-all ${
+                  isLight
+                    ? "border-black/10 bg-black/5 text-dark-700 hover:text-dark-900 hover:border-black/20"
+                    : "border-white/10 bg-white/5 text-dark-300 hover:text-white hover:border-white/20"
+                }`}
               >
                 <Github size={16} />
                 GitHub
@@ -82,7 +93,11 @@ export function Contact() {
                 href={personalInfo.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-white/10 bg-white/5 text-sm text-dark-300 hover:text-blue-400 hover:border-blue-400/20 transition-all"
+                className={`flex items-center gap-2 px-5 py-2.5 rounded-xl border text-sm transition-all ${
+                  isLight
+                    ? "border-black/10 bg-black/5 text-dark-700 hover:text-blue-600 hover:border-blue-500/20"
+                    : "border-white/10 bg-white/5 text-dark-300 hover:text-blue-400 hover:border-blue-400/20"
+                }`}
               >
                 <Linkedin size={16} />
                 LinkedIn
@@ -101,7 +116,10 @@ export function Contact() {
                 onClick={downloadCV}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-primary-600 to-primary-500 text-white text-sm font-medium hover:from-primary-500 hover:to-primary-400 transition-all hover:shadow-lg hover:shadow-primary-500/20 group cursor-pointer"
               >
-                <FileDown size={16} className="group-hover:-translate-y-0.5 transition-transform" />
+                <FileDown
+                  size={16}
+                  className="group-hover:-translate-y-0.5 transition-transform"
+                />
                 Download My CV (PDF)
               </button>
             </motion.div>
@@ -115,7 +133,9 @@ export function Contact() {
           >
             {/* Quick message CTA */}
             <div className="glass rounded-2xl p-5 sm:p-6">
-              <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
+              <h3
+                className={`font-semibold mb-4 flex items-center gap-2 ${isLight ? "text-dark-900" : "text-white"}`}
+              >
                 <Send size={16} className="text-primary-400" />
                 Quick Message
               </h3>
@@ -127,15 +147,17 @@ export function Contact() {
                 href={`https://mail.google.com/mail/?view=cm&fs=1&to=${personalInfo.email}&su=${encodeURIComponent("Portfolio Inquiry")}&body=${encodeURIComponent("Hi Ahmadh, I saw your portfolio and would like to discuss...")}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-sm text-dark-300 hover:text-white hover:border-primary-500/30 hover:bg-primary-500/5 transition-all"
+                className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border text-sm transition-all ${
+                  isLight
+                    ? "bg-black/5 border-black/10 text-dark-700 hover:text-dark-900 hover:border-primary-500/30 hover:bg-primary-500/5"
+                    : "bg-white/5 border-white/10 text-dark-300 hover:text-white hover:border-primary-500/30 hover:bg-primary-500/5"
+                }`}
               >
                 <Mail size={14} />
                 Send me an email
                 <ArrowUpRight size={12} />
               </a>
             </div>
-
-
           </motion.div>
         </div>
       </div>
@@ -154,14 +176,27 @@ function ContactItem({
   value: string;
   href?: string;
 }) {
+  const { theme } = useTheme();
+  const isLight = theme === "light";
+
   const content = (
     <div className="glass rounded-xl p-4 flex items-center gap-4 glass-hover transition-all group cursor-default">
       <div className="p-2 rounded-lg bg-primary-500/10">
         <Icon size={18} className="text-primary-400" />
       </div>
       <div className="min-w-0">
-        <p className="text-xs text-dark-600 uppercase tracking-wider">{label}</p>
-        <p className="text-dark-300 text-sm truncate group-hover:text-white transition-colors">
+        <p
+          className={`text-xs uppercase tracking-wider ${isLight ? "text-dark-500" : "text-dark-600"}`}
+        >
+          {label}
+        </p>
+        <p
+          className={`text-sm truncate transition-colors ${
+            isLight
+              ? "text-dark-700 group-hover:text-dark-900"
+              : "text-dark-300 group-hover:text-white"
+          }`}
+        >
           {value}
         </p>
       </div>

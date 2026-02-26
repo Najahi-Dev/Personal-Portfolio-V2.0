@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -12,6 +13,8 @@ const navLinks = [
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+  const isLight = theme === "light";
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -27,7 +30,9 @@ export function Navbar() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "glass border-b border-white/5 shadow-lg shadow-black/20"
+            ? isLight
+              ? "bg-white/80 backdrop-blur-xl border-b border-black/5 shadow-lg shadow-black/5"
+              : "glass border-b border-white/5 shadow-lg shadow-black/20"
             : "bg-transparent"
         }`}
       >
@@ -39,7 +44,11 @@ export function Navbar() {
               whileHover={{ scale: 1.05 }}
             >
               <span className="text-primary-400">&lt;</span>
-              <span className="text-white uppercase">Ahmadh Najahi</span>
+              <span
+                className={`uppercase ${isLight ? "text-dark-900" : "text-white"}`}
+              >
+                Ahmadh Najahi
+              </span>
               <span className="text-primary-400">/&gt;</span>
             </motion.a>
 
@@ -49,20 +58,67 @@ export function Navbar() {
                 <a
                   key={link.label}
                   href={link.href}
-                  className="px-4 py-2 text-sm text-dark-400 hover:text-white transition-colors rounded-lg hover:bg-white/5 line-decoration"
+                  className={`px-4 py-2 text-sm transition-colors rounded-lg line-decoration ${
+                    isLight
+                      ? "text-dark-700 hover:text-dark-900 hover:bg-black/5"
+                      : "text-dark-400 hover:text-white hover:bg-white/5"
+                  }`}
                 >
                   {link.label}
                 </a>
               ))}
+
+              {/* Theme toggle */}
+              <motion.button
+                onClick={toggleTheme}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className={`ml-2 p-2 rounded-lg transition-colors ${
+                  isLight
+                    ? "text-dark-700 hover:bg-black/5"
+                    : "text-dark-400 hover:bg-white/5"
+                }`}
+                aria-label="Toggle theme"
+              >
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.span
+                    key={theme}
+                    initial={{ y: -10, opacity: 0, rotate: -90 }}
+                    animate={{ y: 0, opacity: 1, rotate: 0 }}
+                    exit={{ y: 10, opacity: 0, rotate: 90 }}
+                    transition={{ duration: 0.2 }}
+                    className="block"
+                  >
+                    {isLight ? <Moon size={18} /> : <Sun size={18} />}
+                  </motion.span>
+                </AnimatePresence>
+              </motion.button>
             </div>
 
-            {/* Mobile toggle */}
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 text-dark-400 hover:text-white transition-colors"
-            >
-              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
+            {/* Mobile controls */}
+            <div className="flex items-center gap-1 md:hidden">
+              <motion.button
+                onClick={toggleTheme}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className={`p-2 rounded-lg transition-colors ${
+                  isLight ? "text-dark-700" : "text-dark-400"
+                }`}
+                aria-label="Toggle theme"
+              >
+                {isLight ? <Moon size={18} /> : <Sun size={18} />}
+              </motion.button>
+              <button
+                onClick={() => setMobileOpen(!mobileOpen)}
+                className={`p-2 transition-colors ${
+                  isLight
+                    ? "text-dark-700 hover:text-dark-900"
+                    : "text-dark-400 hover:text-white"
+                }`}
+              >
+                {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+              </button>
+            </div>
           </div>
         </div>
       </motion.nav>
@@ -74,7 +130,9 @@ export function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-dark-950/95 backdrop-blur-xl pt-20 px-6 md:hidden"
+            className={`fixed inset-0 z-40 backdrop-blur-xl pt-20 px-6 md:hidden ${
+              isLight ? "bg-white/95" : "bg-dark-950/95"
+            }`}
           >
             <div className="flex flex-col gap-2">
               {navLinks.map((link, i) => (
@@ -85,7 +143,11 @@ export function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.1 }}
                   onClick={() => setMobileOpen(false)}
-                  className="text-2xl font-medium text-dark-300 hover:text-white transition-colors py-3 border-b border-white/5"
+                  className={`text-2xl font-medium transition-colors py-3 border-b ${
+                    isLight
+                      ? "text-dark-700 hover:text-dark-900 border-black/5"
+                      : "text-dark-300 hover:text-white border-white/5"
+                  }`}
                 >
                   {link.label}
                 </motion.a>
