@@ -113,8 +113,8 @@ A modern, animated, and responsive personal portfolio website built with **React
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-username/portfolio.git
-cd portfolio
+git clone https://github.com/Najahi-Dev/Personal-Portfolio-V2.0.git
+cd Personal-Portfolio-V2.0
 
 # 2. Install dependencies
 npm install
