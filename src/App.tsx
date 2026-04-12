@@ -12,6 +12,7 @@ import { ParticleBackground } from "./components/ParticleBackground";
 import { PageLoader } from "./components/PageLoader";
 import { WhatsAppButton } from "./components/WhatsAppButton";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
+import { Analytics } from "@vercel/analytics/next"
 
 function AppContent() {
   const [loading, setLoading] = useState(true);
