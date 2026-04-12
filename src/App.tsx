@@ -22,6 +22,7 @@ function AppContent() {
 
   return (
     <>
+    <Analytics/>
       {loading && <PageLoader onLoadingComplete={handleLoadingComplete} />}
       <div
         className={`relative min-h-screen transition-colors duration-500 ${
