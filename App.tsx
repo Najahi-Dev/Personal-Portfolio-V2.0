@@ -12,7 +12,6 @@ import { ParticleBackground } from "./components/ParticleBackground";
 import { PageLoader } from "./components/PageLoader";
 import { WhatsAppButton } from "./components/WhatsAppButton";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
-import { Analytics } from "@vercel/analytics/next"
 
 function AppContent() {
   const [loading, setLoading] = useState(true);
@@ -97,7 +96,9 @@ function AppContent() {
 
         <WhatsAppButton />
       </div>
-      <Analytics />
+      {/* Removed Next.js-specific Vercel Analytics import which required next/navigation.
+          For Vite apps use a compatible analytics integration or the vanilla
+          `@vercel/analytics` SDK. */}
     </>
   );
 }

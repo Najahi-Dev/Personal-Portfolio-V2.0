@@ -3,6 +3,7 @@ import { ArrowDown, Github, Linkedin, FileDown } from "lucide-react";
 import { personalInfo } from "../data/portfolio";
 import { downloadCV } from "../utils/generateCV";
 import { useTheme } from "../context/ThemeContext";
+import profilePic from "../image/mine.jpeg";
 
 export function Hero() {
   const { theme } = useTheme();
@@ -56,6 +57,14 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 text-center">
+        {/* Profile photo */}
+        <div className="mb-6 flex justify-center">
+          <img
+            src={profilePic}
+            alt={personalInfo.name}
+            className="w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover ring-2 ring-primary-400/60"
+          />
+        </div>
         {/* Status badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

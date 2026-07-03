@@ -40,22 +40,25 @@ export function ParticleBackground() {
   const scrollRef = useRef(0);
   const timeRef = useRef(0);
 
-  const createParticles = useCallback((width: number, height: number): Particle[] => {
-    const count = Math.min(Math.floor((width * height) / 18000), 80);
-    const types: Array<"dot" | "ring" | "star"> = ["dot", "ring", "star"];
-    return Array.from({ length: count }, () => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
-      size: Math.random() * 2 + 0.5,
-      opacity: Math.random() * 0.4 + 0.1,
-      hue: 220 + Math.random() * 40,
-      life: Math.random() * 1000,
-      maxLife: 800 + Math.random() * 400,
-      type: types[Math.floor(Math.random() * types.length)],
-    }));
-  }, []);
+  const createParticles = useCallback(
+    (width: number, height: number): Particle[] => {
+      const count = Math.min(Math.floor((width * height) / 18000), 80);
+      const types: Array<"dot" | "ring" | "star"> = ["dot", "ring", "star"];
+      return Array.from({ length: count }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        size: Math.random() * 2 + 0.5,
+        opacity: Math.random() * 0.4 + 0.1,
+        hue: 220 + Math.random() * 40,
+        life: Math.random() * 1000,
+        maxLife: 800 + Math.random() * 400,
+        type: types[Math.floor(Math.random() * types.length)],
+      }));
+    },
+    [],
+  );
 
   const createOrbs = useCallback((width: number, height: number): Orb[] => {
     return Array.from({ length: 5 }, (_, i) => ({
@@ -107,7 +110,13 @@ export function ParticleBackground() {
       }
     };
 
-    const drawStar = (cx: number, cy: number, size: number, opacity: number, hue: number) => {
+    const drawStar = (
+      cx: number,
+      cy: number,
+      size: number,
+      opacity: number,
+      hue: number,
+    ) => {
       ctx.save();
       ctx.globalAlpha = opacity;
       ctx.strokeStyle = `hsla(${hue}, 70%, 70%, ${opacity})`;
@@ -137,10 +146,21 @@ export function ParticleBackground() {
         orb.pulsePhase += orb.pulseSpeed * dt;
         const pulse = Math.sin(orb.pulsePhase) * 0.3 + 0.7;
         const ox = orb.x + Math.cos(orb.angle) * 80;
-        const oy = orb.y + Math.sin(orb.angle * 0.7) * 60 - scrollRef.current * 0.1;
+        const oy =
+          orb.y + Math.sin(orb.angle * 0.7) * 60 - scrollRef.current * 0.1;
 
-        const gradient = ctx.createRadialGradient(ox, oy, 0, ox, oy, orb.radius * pulse);
-        gradient.addColorStop(0, `hsla(${orb.hue + Math.sin(time) * 10}, 60%, 50%, 0.04)`);
+        const gradient = ctx.createRadialGradient(
+          ox,
+          oy,
+          0,
+          ox,
+          oy,
+          orb.radius * pulse,
+        );
+        gradient.addColorStop(
+          0,
+          `hsla(${orb.hue + Math.sin(time) * 10}, 60%, 50%, 0.04)`,
+        );
         gradient.addColorStop(0.5, `hsla(${orb.hue + 20}, 50%, 40%, 0.02)`);
         gradient.addColorStop(1, "transparent");
         ctx.fillStyle = gradient;
@@ -156,8 +176,9 @@ export function ParticleBackground() {
         ctx.beginPath();
         const baseY = canvas.height * 0.15 + i * (canvas.height * 0.1);
         for (let x = 0; x <= canvas.width; x += 4) {
-          const wave = Math.sin(x * 0.005 + time * 0.8 + i * 0.5) * 30 +
-                       Math.sin(x * 0.01 + time * 1.2 + i) * 15;
+          const wave =
+            Math.sin(x * 0.005 + time * 0.8 + i * 0.5) * 30 +
+            Math.sin(x * 0.01 + time * 1.2 + i) * 15;
           const yPos = baseY + wave - scrollRef.current * 0.05 * (i + 1);
           if (x === 0) ctx.moveTo(x, yPos);
           else ctx.lineTo(x, yPos);
@@ -178,8 +199,12 @@ export function ParticleBackground() {
           p.y = Math.random() * canvas.height;
         }
 
-        const lifeFade = p.life < 100 ? p.life / 100 :
-                         p.life > p.maxLife - 100 ? (p.maxLife - p.life) / 100 : 1;
+        const lifeFade =
+          p.life < 100
+            ? p.life / 100
+            : p.life > p.maxLife - 100
+              ? (p.maxLife - p.life) / 100
+              : 1;
 
         // Movement
         p.x += p.vx;
@@ -196,11 +221,11 @@ export function ParticleBackground() {
         const dy = my - p.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < 200 && dist > 30) {
-          const force = (200 - dist) / 200 * 0.015;
+          const force = ((200 - dist) / 200) * 0.015;
           p.vx += (dx / dist) * force;
           p.vy += (dy / dist) * force;
         } else if (dist <= 30) {
-          const force = (30 - dist) / 30 * 0.05;
+          const force = ((30 - dist) / 30) * 0.05;
           p.vx -= (dx / dist) * force;
           p.vy -= (dy / dist) * force;
         }
@@ -278,9 +303,10 @@ export function ParticleBackground() {
         m.life -= dt * 0.001;
 
         const gradient = ctx.createLinearGradient(
-          m.x, m.y,
+          m.x,
+          m.y,
           m.x - Math.cos(m.angle) * m.length,
-          m.y - Math.sin(m.angle) * m.length
+          m.y - Math.sin(m.angle) * m.length,
         );
         gradient.addColorStop(0, `rgba(180, 200, 255, ${m.opacity * m.life})`);
         gradient.addColorStop(1, "transparent");
@@ -289,7 +315,7 @@ export function ParticleBackground() {
         ctx.moveTo(m.x, m.y);
         ctx.lineTo(
           m.x - Math.cos(m.angle) * m.length,
-          m.y - Math.sin(m.angle) * m.length
+          m.y - Math.sin(m.angle) * m.length,
         );
         ctx.strokeStyle = gradient;
         ctx.lineWidth = 1.2;
@@ -306,10 +332,14 @@ export function ParticleBackground() {
       ctx.save();
       ctx.globalAlpha = 0.015;
       for (let i = 0; i < 3; i++) {
-        const cx = canvas.width * (0.25 + i * 0.25) + Math.sin(time * 0.3 + i) * 40;
-        const cy = canvas.height * 0.5 + Math.cos(time * 0.2 + i * 2) * 60 - scrollRef.current * 0.08;
+        const cx =
+          canvas.width * (0.25 + i * 0.25) + Math.sin(time * 0.3 + i) * 40;
+        const cy =
+          canvas.height * 0.5 +
+          Math.cos(time * 0.2 + i * 2) * 60 -
+          scrollRef.current * 0.08;
         const size = 40 + i * 20;
-        const rotation = time * 0.1 + i * Math.PI / 3;
+        const rotation = time * 0.1 + (i * Math.PI) / 3;
 
         ctx.save();
         ctx.translate(cx, cy);
